@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
 
-  private _loginUrl = "http://104.155.36.134:3000/user/login";
+  private _loginUrl = "http://localhost:3000/user/login";
 
   tc : any;
   voteStatus: any;
@@ -34,7 +34,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
   registerUser(user){
-      return this.http.post('http://104.155.36.134:3000/user/register/', user , httpOptions);
+      return this.http.post('http://localhost:3000/user/register/', user , httpOptions);
   }
 
 }

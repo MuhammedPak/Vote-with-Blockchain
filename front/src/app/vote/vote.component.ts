@@ -28,9 +28,9 @@ export class VoteComponent implements OnInit {
   decryptKey: any;
   decryptShowed: boolean = false;
 
-  private _TxUrl = "http://104.155.36.134:3000/transactions";
-  private _voteUrl = "http://104.155.36.134:3000/user/update/";
-  private _userUrl = "http://104.155.36.134:3000/user/";
+  private _TxUrl = "http://localhost:3000/transactions";
+  private _voteUrl = "http://localhost:3000/user/update/";
+  private _userUrl = "http://localhost:3000/user/";
 
   constructor(private _auth: AuthService, private http: HttpClient,
     private _router: Router) { }
