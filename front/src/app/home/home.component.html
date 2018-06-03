@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row col-12 justify-content-center mt-5">
+    <div class="jumbotron">
+      <h4 class="display-5 text-center">Türkiye Cumhurbaşkanlığı Seçim Sistemine Hoşgeldiniz!!!</h4>
+      <br>
+      <p class="lead text-center">Türkiye'de ilk defa kullanılacak olan blockchain altyapılı seçim sistemine hoşgeldiniz.</p>
+      <hr class="my-4">
+      <p>Bulunmuş olduğunuz sistem açık kaynak kodlu ve tamamen güvenilirdir.</p>
+      <p>Verecek olduğunuz oy anonim olarak kalmanızı sağlayacak bir algoritmayla blockchain yapısına eklenir.</p>
+      <p>Kişilerin kullanmış olduğu oylar tek bir merkezde değil bir çok bilgisayarda kaydedilmektedir. </p>
+      <hr class="my-4">
+      <div class="alert alert-dismissible alert-warning">
+        <h4 class="alert-heading">UYARI!</h4>
+        <p>Oyunuzu seçip "ONAY" tuşuna bastıktan sonra oyunuzu kesinlikle değiştiremezsiniz.</p>
+        <p>Onayladıktan sonra karşınıza çıkan ekranda unutmayacağınız bir şifre belirleyip giriniz.</p>
+        <p>Girdiğiniz şifre size özel bir Oy kimliği oluşturulmasını sağlayacaktır. </p>
+        <p> Bu oy kimliği ve şifreniz ile beraber herhangi bir özel durumda oyun size ait olup olmadığını ispatlayabilirsiniz.</p>
+      </div>
+      <div class="row justify-content-center mt-4">
+        <p class="lead">
+          <a *ngIf="stat == 'false'" class="btn btn-primary btn-lg" routerLink="/vote" role="button">OY KULLAN</a>
+
+          <a  *ngIf="stat == 'true'" class="btn btn-success btn-lg" routerLink="/vote" role="button"> OY KİMLİĞİNİ GÖRÜNTÜLE</a>
+        </p>
+      </div>
+      <div *ngIf="stat == 'true'" class="row justify-content-center mt-4">
+          <p class="col-12 lead text-center">Şuanki Blockchain Yapısını test etmek için Yönlendirme linkleri ( Mining işlemi Yeni Block Oluşturur)</p>
+          <a class="btn btn-lg col-4 m-2" href="http://pixxel.media:3000/blockchain" role="button"> Blockchain'i Görüntüle</a>
+          <a class="btn btn-lg col-4 m-2" href="http://pixxel.media:3000/mine" role="button"> Gelen transectionları Mine Et</a>
+      </div>
+
+    </div>
+  </div>
+</div>

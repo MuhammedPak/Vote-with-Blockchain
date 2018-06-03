@@ -1,0 +1,150 @@
+<app-navbar></app-navbar>
+
+<section *ngIf="isVote == 'false'">
+  <div class="container mt-5 mb-5">
+    <div class="row mt-5 justify-content-center">
+      <div class="mr-1 ml-1">
+        <input type="radio" id="control_01" name="aday" value="1" (click)="aday(1)" data-toggle="modal" data-target="#onayModal">
+        <label for="control_01">
+          <img src="https://pbs.twimg.com/profile_images/887001037269323777/g6yxuJvl_400x400.jpg" class="rounded-circle m-3" width="145"
+            height="145">
+          <h2>Recep Tayyip Erdoğan</h2>
+        </label>
+      </div>
+      <div class="mr-1 ml-1">
+        <input type="radio" id="control_02" name="aday" value="2" (click)="aday(2)" data-toggle="modal" data-target="#onayModal">
+        <label for="control_02">
+          <img src="https://pbs.twimg.com/profile_images/995310461343207424/KxK3ZEiM_400x400.jpg" class="rounded-circle m-3" width="145"
+            height="145">
+          <h2>Meral Akşener</h2>
+        </label>
+      </div>
+      <div class="mr-1 ml-1">
+        <input type="radio" id="control_03" name="aday" value="3" (click)="aday(3)" data-toggle="modal" data-target="#onayModal">
+        <label for="control_03">
+          <img src="https://pbs.twimg.com/profile_images/994271962577997828/tO_tYVba_400x400.jpg" class="rounded-circle m-3" width="145"
+            height="145">
+          <h2>Muharrem İnce</h2>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- *ngIf="status == false || status == undefined"-->
+<section *ngIf="isVote == 'true'">
+  <div class="container mb-5">
+    <div class="row col-12 justify-content-center mt-5">
+      <div class="jumbotron">
+        <h4 class="display-5 text-center text-success">OY KULLANDIĞINIZ İÇİN TEŞEKKÜR EDERİZ...</h4>
+        <br>
+        <p class="lead text-center mb-5">Türkiye'de ilk defa uygulanan blockchain altyapılı seçim sisteminde oyunuzu kullandınız.</p>
+        <div class="alert alert-dismissible alert-primary align-text-top">
+          <h4 class="alert-heading mt-2">BİLGİLENDİRME</h4>
+          <hr class="my-4">
+          <p>Oy kimliğiniz ve oy kullanırken girmiş olduğunuz şifreniz ile herhangi bir durumda oyun size ait olduğunuz kanıtlayabilirsiniz.</p>
+          <p>Oyunuz blockchain altyapısına anonim bir şekilde kaydedilmiştir.</p>
+          <p>Lütfen güvenliğiniz için şifrenizi veya Oy kimliğinizi başkalarıyla paylaşmayınız. </p>
+        </div>
+        <div class="card border-warning mb-3 text-center mt-5">
+          <div class="card-body">
+            <h4 class="card-title text-danger">Oy Kimliğiniz </h4>
+            <p class="card-text">{{ oyId }}</p>
+            <button type="submit" class="btn btn-warning btn-sm mt-3" data-toggle="modal" data-target="#decryptModal">Oyunu Görüntüle</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="onayModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Onay Ekranı</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="!onay" class="modal-body text-center">
+        <p style="font-size: 20px;">
+          <span style="color:#0d87e9;"> {{secilen}} </span>
+          <br> kişisine oy vermek istediğinizden emin misiniz ?</p>
+      </div>
+      <form>
+        <div *ngIf="onay" class="modal-body">
+          <div class="card border-danger mb-3">
+            <div class="card-body">
+              <p class="card-text text-center">
+                <span style="color:#c5000d; font-size:16px; "> Onay butonuna basıldıktan sonra işlem geri alınamaz!!</span>
+                Girdiğiniz şifre size özel bir
+                <span style="color:#c5000d">Oy Kimliği</span> oluşturulmasını sağlayacaktır. Oluşturulacak olan
+                <span style="color:#c5000d">Oy Kimliği</span> ve belirlediğiniz şifreniz ile beraber herhangi bir özel durumda oyunuzun size ait olup
+                olmadığını ispatlayabilirsiniz.
+              </p>
+            </div>
+          </div>
+
+          <input class="form-control form-control-lg" placeholder="Şifre Giriniz..." type="password" [(ngModel)]="keyCode" name="keyCode" #keyC="ngModel"
+            required>
+            <div *ngIf="keyC.invalid && (keyC.dirty || keyC.touched)" class="alert alert-danger mt-2">
+              <div *ngIf="keyC.errors.required">
+                Bir şifre giriniz.
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="!onay" type="submit" class="btn btn-primary" (click)="isOK(true)">EVET</button>
+          <button *ngIf="onay" type="button" class="btn btn-success" (click)="vote(keyCode)" data-dismiss="modal">ONAY</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="isOK(false)">VAZGEÇ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="decryptModal" tabindex="-2" role="dialog" aria-labelledby="ModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Kullandığınız Oy</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!decryptShowed">
+            <div class="text-primary text-center form-control-lg">Kullanmış olduğunuz oyu, oy kullanırken belirlediğiniz şifreyi aşağıdaki alana girerek öğrenebilirsiniz.</div>
+            <input class="form-control form-control-lg mt-3" placeholder="Şifre Giriniz..." type="password" [(ngModel)]="decryptKey"
+              name="decryptKey" #keyCrypt="ngModel" required>
+              <div *ngIf="keyCrypt.invalid && (keyCrypt.dirty || keyCrypt.touched)" class="alert alert-danger mt-2">
+                <div *ngIf="keyCrypt.errors.required">
+                  Bir şifre giriniz.
+                </div>
+              </div>
+            <button type="button" class="btn btn-success btn-sm mt-3 float-right" (click)="decrypt(oyId, decryptKey)">Görüntüle</button>
+        </div>
+        
+        <div *ngIf="decryptShowed" class="text-success m-1 font-weight-bold text-center" style="font-size:20px;"><p>Oy verdiğiniz cumhurbaşkanı adayı </p> {{secilen}} </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container col-12 fixed-bottom mb-3">
+  <div class="row col-12  justify-content-center">
+    <div class="card bg-light">
+      <div class="card-body">
+        <p class="card-text font-weight-bold" style="font-size: 18px; font-family: 'Montserrat'"> OYLAMANIN BiTMESiNE SON&nbsp;
+          <countdown-timer  [end]="'2018-06-10 03:02:00'"></countdown-timer>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

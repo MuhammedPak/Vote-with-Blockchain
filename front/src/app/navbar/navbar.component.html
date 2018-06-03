@@ -1,0 +1,20 @@
+<nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #c5000d;">
+    <a class="navbar-brand ml-3" routerLink="/home" routerLinkActive="active">Türkiye Cumhurbaşkanlığı Seçim Sistemi</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mr-auto">
+      </div>
+      <ul class="navbar-nav">
+
+        <a class=" nav-link" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">
+          <b>GİRİŞ YAP</b>
+        </a>
+        <a class=" nav-link mr-3" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()" style="cursor:pointer;">
+         <h5> <b>ÇIKIŞ YAP</b></h5>
+        </a>
+      </ul>
+    </div>
+  </nav>

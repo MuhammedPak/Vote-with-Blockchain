@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-xs-12 col-sm-12 col-xl-6 col-lg-6">
+      <div class="card ">
+        <img class="card-img-top" src="https://static.turkiye.gov.tr/themes/izmir/images/edkkds.svg" alt="Card image cap">
+        <div class="card-body p-5">
+          <form>
+            <div class="form-group">
+              <label for="tc">T.C. Kimlik No</label>
+              <input [(ngModel)]="loginUserData.tc" name="tc" type="text" class="form-control" id="tc" #tc="ngModel" minlength="11" maxlength="11" required>
+            </div>
+            <div *ngIf="tc.invalid && (tc.dirty || tc.touched)" class="alert alert-danger">
+              <div *ngIf="tc.errors.required">
+                Tc numarası giriniz.
+              </div>
+              <div *ngIf="tc.errors.minlength || tc.errors.maxlength">
+                11 karakterli TC kimlik numaranızı giriniz.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">e-Devlet Şifresi</label>
+              <input [(ngModel)]="loginUserData.password" name="password" type="password" class="form-control" id="password" #password="ngModel" required>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+              <div *ngIf="password.errors.required">
+                E-devlet şifrenizi giriniz.
+              </div>
+            </div>
+
+            <button (click)="loginUser()" type="submit" class="btn btn-success mt-4">Sisteme Giriş Yap</button>
+          </form>
+          <div class="float-right">Hesabınız mı yok ?
+            <a [routerLink]="['/register']"> KAYIT OL</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
